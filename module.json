@@ -1,0 +1,43 @@
+{
+  "id": "harrowing-helper",
+  "title": "Harrowing Helper",
+  "description": "Automates the Harrowing ritual for Pathfinder 2e.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Your Name"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system"
+      }
+    ],
+    "requires": [
+      {
+        "id": "advanced-macros",
+        "type": "module"
+      }
+    ]
+  },
+  "packs": [
+    {
+      "name": "macros",
+      "label": "Macros",
+      "type": "Macro",
+      "path": "packs/macros"
+    },
+    {
+      "name": "documentation",
+      "label": "Documentation",
+      "type": "JournalEntry",
+      "path": "packs/documentation"
+    }
+  ]
+}
