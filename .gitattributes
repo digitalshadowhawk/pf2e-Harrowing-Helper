@@ -1,0 +1,2 @@
+# Prevent git from corrupting LevelDB binary pack files with line ending conversion
+packs/**/* binary
