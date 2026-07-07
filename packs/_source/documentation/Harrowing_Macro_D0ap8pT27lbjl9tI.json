@@ -1,0 +1,63 @@
+{
+  "name": "Harrowing Macro",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Harrowing Macro Documentation",
+      "type": "text",
+      "_id": "Pf68aWJ4dVWUWYLq",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h1>Harrowing (PF2e) — Party Automation Macro</h1>\r\n\r\n<p><strong>Version:</strong> 1.0.11 | <strong>Compatibility:</strong> Foundry VTT v13 / PF2e v7.8+</p>\r\n\r\n<p>So your GM let you run a Harrowing build!? You don't want to spend the entire session rolling ritual checks and applying effects? Now you can have the AWESOME power of HARROWING RITUAL with all of the boring stuff automated.</p>\r\n\r\n<h2>Purpose</h2>\r\n\r\n<p>This macro automates the Harrowing ritual from Pathfinder 2e.</p>\r\n\r\n<p>It can perform a Harrowing for:</p>\r\n\r\n<ul>\r\n<li><p>A targeted token</p></li>\r\n<li><p>A selected party member</p></li>\r\n<li><p>Multiple party members</p></li>\r\n<li><p>An entire configured party</p></li>\r\n</ul>\r\n\r\n<p>The macro:</p>\r\n\r\n<ul>\r\n<li><p>Calculates Harrow checks automatically</p></li>\r\n<li><p>Detects relevant feats and items</p></li>\r\n<li><p>Handles Reading the Signs card selection</p></li>\r\n<li><p>Applies Harrowing effects automatically</p></li>\r\n<li><p>Supports characters not owned by the player running the ritual</p></li>\r\n<li><p>Posts a consolidated chat summary for the entire ritual</p></li>\r\n</ul>\r\n\r\n<hr />\r\n\r\n<h1>Setup</h1>\r\n\r\n<h2>Required Modules</h2>\r\n\r\n<ul>\r\n<li><p>Advanced Macros</p></li>\r\n</ul>\r\n\r\n<h2>Required Macros</h2>\r\n\r\n<p>The system uses two macros:</p>\r\n\r\n<ol>\r\n<li><p><strong>Harrowing</strong></p></li>\r\n<li><p><strong>Harrowing Apply Effects</strong></p></li>\r\n</ol>\r\n\r\n<p>Do not rename either macro. The module automatically configures <strong>Harrowing Apply Effects</strong> for GM execution on world load.</p>\r\n\r\n<p><strong>First Install:</strong> After importing the macros from the compendium, manually set <strong>Harrowing Apply Effects</strong> to <strong>Observer</strong> permission (right-click the macro → Configure → Default Ownership: Observer). The module will maintain this automatically on subsequent world loads.</p>\r\n\r\n<p><strong>Note:</strong> A GM must be logged in for the macro to function. The macro will fail to route effects if no GM is present in the world.</p>\r\n\r\n<hr />\r\n\r\n<h2>Party Configuration</h2>\r\n\r\n<ol>\r\n<li><p>Open each character sheet.</p></li>\r\n<li><p>Click the book icon (top left) to obtain the actor UUID.</p></li>\r\n<li><p>Add the UUID to the <code>TARGET_PREFS</code> section.</p></li>\r\n<li><p>Configure:</p>\r\n<ul>\r\n<li><p>Name</p></li>\r\n<li><p>Strategy</p></li>\r\n<li><p>Suit preference order — use numbers 1–6 per the AoN Harrowing table:</p>\r\n<ul>\r\n<li><p>1 = Hammers (Strikes)</p></li>\r\n<li><p>2 = Keys (Reflex saves)</p></li>\r\n<li><p>3 = Shields (Fortitude saves)</p></li>\r\n<li><p>4 = Books (Skill checks)</p></li>\r\n<li><p>5 = Stars (Will saves)</p></li>\r\n<li><p>6 = Crowns (All other checks)</p></li>\r\n</ul></li>\r\n</ul></li>\r\n<li><p>Repeat for all party members.</p></li>\r\n</ol>\r\n\r\n<p>Unlisted characters use the fallback preference profile.</p>\r\n\r\n<hr />\r\n\r\n<h2>Suit Strategies</h2>\r\n\r\n<p>With the Reading the Signs Harrower 8th level feat the caster may draw 2 and choose 1 for each draw, this allows some strategy in how the suits are selected.</p>\r\n\r\n<h3>Priority</h3>\r\n\r\n<p>Always selects the highest-ranked available suit from the character's preference list.</p>\r\n\r\n<ul>\r\n<li><p>Striker: <code>[1, 5, 4, 2, 3, 6]</code></p></li>\r\n<li><p>Striker/Skills: <code>[4, 1, 5, 2, 3, 6]</code></p></li>\r\n<li><p>Caster: <code>[6, 4, 3, 2, 5, 1]</code></p></li>\r\n</ul>\r\n\r\n<h3>Spread</h3>\r\n\r\n<p>Attempts to avoid duplicate suits during a single Harrowing before falling back to preference order.</p>\r\n\r\n<hr />\r\n\r\n<h2>Fixed Caster (Optional)</h2>\r\n\r\n<p>The macro can be configured to always use a specific caster by setting:</p>\r\n\r\n<p><code>FIXED_CASTER_ACTOR_UUID</code></p>\r\n\r\n<p>If left blank, the currently selected token is used as the caster.</p>\r\n\r\n<p>Setting this is required to use the macro from screens without tokens such as a large area map or world map.</p>\r\n\r\n<hr />\r\n\r\n<h2>Configuration Options</h2>\r\n\r\n<p>Review the configuration section near the top of the macro before use.</p>\r\n\r\n<p>Notable options include:</p>\r\n\r\n<ul>\r\n<li><p>Harrow skill selection mode</p></li>\r\n<li><p>Custom skill selection</p></li>\r\n<li><p>DC adjustments</p></li>\r\n<li><p>Token icon visibility</p></li>\r\n<li><p>Chat display settings</p></li>\r\n<li><p>Party defaults</p></li>\r\n<li><p>Default apply mode (Target / Party Member / Whole Party)</p></li>\r\n<li><p>Visual suit colors and icons</p></li>\r\n</ul>\r\n\r\n<hr />\r\n\r\n<h1>Gameplay Notes</h1>\r\n\r\n<h2>Existing Harrowing Effects</h2>\r\n\r\n<p>Rules-as-written, a creature cannot benefit from a new Harrowing while any previous Harrowing card effects remain active.</p>\r\n\r\n<p>The macro provides a <strong>Clear Existing Effects</strong> option which removes existing Harrowing effects before applying new ones.</p>\r\n\r\n<hr />\r\n\r\n<h2>Consuming Harrowing Rerolls</h2>\r\n\r\n<p>If you need to safely expend Harrowing rerolls outside of combat:</p>\r\n\r\n<h3>Hammers</h3>\r\n<ul>\r\n<li><p>Any Strike</p></li>\r\n</ul>\r\n\r\n<h3>Books</h3>\r\n<ul>\r\n<li><p>Any skill check</p></li>\r\n</ul>\r\n\r\n<h3>Crowns</h3>\r\n<ul>\r\n<li><p>Seek checks</p></li>\r\n</ul>\r\n\r\n<h3>Shields</h3>\r\n<ul>\r\n<li><p>Drugs</p></li>\r\n<li><p>Holding breath (be careful on a critical failure)</p></li>\r\n<li><p>Cantrips</p></li>\r\n</ul>\r\n\r\n<h3>Keys</h3>\r\n<ul>\r\n<li><p>Grab a Ledge</p></li>\r\n<li><p>Cantrips</p></li>\r\n</ul>\r\n\r\n<h3>Stars</h3>\r\n<ul>\r\n<li><p>Low-level Daze / cast at lower level</p></li>\r\n<li><p>Certain drugs</p></li>\r\n<li><p>Frequent Will saves generated by allies</p></li>\r\n</ul>\r\n\r\n<p>Useful classes include:</p>\r\n\r\n<ul>\r\n<li><p>Bard</p></li>\r\n<li><p>Psychic</p></li>\r\n<li><p>Witch</p></li>\r\n<li><p>Illusion-focused casters</p></li>\r\n</ul>\r\n\r\n<hr />\r\n\r\n<h1>Automatic Detection</h1>\r\n\r\n<p>The macro dynamically reads character data to determine behavior.</p>\r\n\r\n<h2>Feats</h2>\r\n\r\n<ul>\r\n<li><p>Experienced Harrower</p></li>\r\n<li><p>Harrow Ritualist</p></li>\r\n<li><p>Thaumaturgic Ritualist</p></li>\r\n<li><p>Reading the Signs</p></li>\r\n</ul>\r\n\r\n<h2>Items</h2>\r\n\r\n<ul>\r\n<li><p>Fine Harrow Deck</p></li>\r\n</ul>\r\n\r\n<h2>Skills</h2>\r\n\r\n<ul>\r\n<li><p>Occultism</p></li>\r\n<li><p>Fortune-Telling Lore</p></li>\r\n</ul>\r\n\r\n<p>Depending on configuration, the macro can automatically use the higher modifier.</p>\r\n\r\n<h2>Active Effects</h2>\r\n\r\n<p>The macro detects existing Harrowing effects for:</p>\r\n\r\n<ul>\r\n<li><p>Display purposes</p></li>\r\n<li><p>Reapplication protection</p></li>\r\n<li><p>Automatic cleanup</p></li>\r\n</ul>\r\n\r\n<hr />\r\n\r\n<h1>Technical Notes</h1>\r\n\r\n<h2>Harrowing Effect UUID</h2>\r\n\r\n<p>The macro relies on the PF2e compendium effect:</p>\r\n\r\n<p><strong>Spell Effect: Harrowing</strong></p>\r\n\r\n<p>If this UUID changes in a future PF2e release, effect application will stop functioning until updated.</p>\r\n\r\n<h2>Actor Data Dependencies</h2>\r\n\r\n<p>The macro relies on PF2e actor skill structures including:</p>\r\n\r\n<ul>\r\n<li><p><code>actor.skills</code></p></li>\r\n<li><p><code>actor.system.skills</code></p></li>\r\n</ul>\r\n\r\n<p>Major PF2e data model changes may require updates.</p>\r\n\r\n<h2>ChoiceSet Handling</h2>\r\n\r\n<p>The macro pre-seeds PF2e ChoiceSets to avoid effect-selection prompts.</p>\r\n\r\n<p>This behavior is PF2e-version sensitive.</p>\r\n\r\n<p>If selection dialogs begin appearing unexpectedly after a system update, review:</p>\r\n\r\n<ul>\r\n<li><p><code>rulesSelections</code></p></li>\r\n<li><p>ChoiceSet rule elements</p></li>\r\n<li><p>Crowns effect handling</p></li>\r\n</ul>\r\n\r\n<hr />\r\n\r\n<h1>Future Maintenance</h1>\r\n\r\n<h2>If Updating the Macro</h2>\r\n\r\n<p>Perform the following regression tests:</p>\r\n\r\n<ol>\r\n<li><p>Single target</p></li>\r\n<li><p>Multiple targets / whole party</p></li>\r\n<li><p>Verify no PF2e ChoiceSet prompts appear</p></li>\r\n<li><p>Verify chat card output is correct</p></li>\r\n<li><p>Verify effects apply correctly to actors not owned by the player</p></li>\r\n<li><p>Verify Clear Existing Effects works correctly</p></li>\r\n<li><p>Verify Reading the Signs suit selection works correctly</p></li>\r\n</ol>\r\n\r\n<h2>Companion Macro</h2>\r\n\r\n<p>The <strong>Harrowing</strong> macro performs ritual resolution.</p>\r\n\r\n<p>The <strong>Harrowing Apply Effects</strong> macro performs effect application as the GM.</p>\r\n\r\n<p>Both macros are required for full functionality.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "H7TUhdxuA54VX8gb": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "pf2e",
+        "systemVersion": "7.8.0",
+        "lastModifiedBy": null
+      },
+      "_key": "!journal.pages!D0ap8pT27lbjl9tI.Pf68aWJ4dVWUWYLq"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "ownership": {
+    "default": 0,
+    "H7TUhdxuA54VX8gb": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.350",
+    "systemId": "pf2e",
+    "systemVersion": "7.8.0",
+    "createdTime": 1781041327522,
+    "modifiedTime": 1781041327522,
+    "lastModifiedBy": "H7TUhdxuA54VX8gb"
+  },
+  "_id": "D0ap8pT27lbjl9tI",
+  "sort": 0,
+  "_key": "!journal!D0ap8pT27lbjl9tI"
+}

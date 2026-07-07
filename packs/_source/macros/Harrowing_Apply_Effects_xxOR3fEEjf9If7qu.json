@@ -1,0 +1,32 @@
+{
+  "name": "Harrowing Apply Effects",
+  "type": "script",
+  "author": "H7TUhdxuA54VX8gb",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "// Harrowing Apply Effects — v1.0.11\n// Requires Advanced Macros.\n// Configured automatically by the module on world load.\n//\n// Scope:\n// {\n//   actorUuid,\n//   clearExisting,\n//   effectDocs\n// }\n\n// Stable compendium UUID for Spell Effect: Harrowing\nconst HARROWING_EFFECT_UUID = \"Compendium.pf2e.spell-effects.Item.LfxwvZRwtrh8mQN0\";\n\nconst targetActor = await fromUuid(scope.actorUuid);\n\nconst clearExisting = scope.clearExisting;\nconst effectDocs = scope.effectDocs;\n\n\n\n// Helper Functions\n\nfunction hasAnyHarrowingEffect(targetActor) {\n  return (\n    targetActor?.items?.some(\n      (i) =>\n        i.type === \"effect\" &&\n        i.flags?.world?.harrowingBatch === true &&\n        i.flags?.world?.harrowingBatchSource === HARROWING_EFFECT_UUID\n    ) ?? false\n  );\n}\n\n\nif (clearExisting) {\n      const toDelete = (targetActor.items ?? [])\n        .filter(\n          (i) =>\n            i.type === \"effect\" &&\n            i.flags?.world?.harrowingBatch === true &&\n            i.flags?.world?.harrowingBatchSource === HARROWING_EFFECT_UUID\n        )\n        .map((i) => i.id);\n\n      if (toDelete.length) await targetActor.deleteEmbeddedDocuments(\"Item\", toDelete);\n    } else {\n      // If not clearing, skip actors that already have Harrowing active.\n      if (hasAnyHarrowingEffect(targetActor)) {\n        throw new Error(\n          `${targetActor.name} already has Harrowing active. Enable \"Clear existing\" or uncheck them.`\n                        );\n      }\n    }\n\n    // Apply new effects for this target.\n    await targetActor.createEmbeddedDocuments(\"Item\", effectDocs);\n    if (typeof targetActor?.reset === \"function\") await targetActor.reset();",
+  "folder": null,
+  "ownership": {
+    "default": 2,
+    "H7TUhdxuA54VX8gb": 3
+  },
+  "flags": {
+    "advanced-macros": {
+      "runForSpecificUser": "GM"
+    }
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.350",
+    "systemId": "pf2e",
+    "systemVersion": "7.8.0",
+    "createdTime": 1781041323187,
+    "modifiedTime": 1781041323187,
+    "lastModifiedBy": "H7TUhdxuA54VX8gb"
+  },
+  "_id": "xxOR3fEEjf9If7qu",
+  "sort": 0,
+  "_key": "!macros!xxOR3fEEjf9If7qu"
+}

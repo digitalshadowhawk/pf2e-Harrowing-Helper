@@ -74,6 +74,50 @@ Full setup and configuration details are in the **Harrowing Helper — Documenta
 
 ---
 
+## Development
+
+Compendium packs (**macros**, **documentation**) are stored two ways:
+
+- `packs/_source/<pack-name>/*.json` — plaintext JSON, one file per document. This is the source of truth and what's committed to git.
+- `packs/<pack-name>/` — the compiled LevelDB pack that Foundry actually loads. It's a generated build artifact (gitignored) — don't edit it directly.
+
+Conversion between the two is handled by [`@foundryvtt/foundryvtt-cli`](https://github.com/foundryvtt/foundryvtt-cli) via `scripts/packs.mjs`, which reads the pack list straight from `module.json`.
+
+**Setup**
+
+```
+npm install
+```
+
+**Edit compendium content**
+
+Edit the JSON files under `packs/_source/`, then compile them into the LevelDB packs Foundry reads:
+
+```
+npm run pack
+```
+
+**Pull changes made in Foundry back into JSON**
+
+If you edited a macro or journal from inside Foundry (which writes to the compiled LevelDB pack), extract those changes back to plaintext JSON so they can be committed:
+
+```
+npm run unpack
+```
+
+**Editing the documentation journal**
+
+The documentation journal's page content is authored as HTML in `source/documentation.html` (much easier to edit than an HTML string embedded in JSON). After editing it, run:
+
+```
+node source/bake-docs.cjs
+npm run pack
+```
+
+This copies the HTML into `packs/_source/documentation/*.json`, then `npm run pack` compiles it into the LevelDB pack.
+
+---
+
 ## Compatibility
 
 | Version | Notes |
